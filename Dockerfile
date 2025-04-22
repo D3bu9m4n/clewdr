@@ -25,8 +25,8 @@ COPY . .
 # 构建 release 版本
 RUN cargo build --release
 
-# 运行阶段，使用更小的基础镜像
-FROM debian:bullseye-slim
+# 运行阶段，使用更小的基础镜像（升级为 bookworm，GLIBC 2.36+，兼容 Rust nightly 构建产物）
+FROM debian:bookworm-slim
 
 ARG APP_DIR=/app
 
@@ -41,6 +41,9 @@ COPY --from=builder ${APP_DIR}/target/release/clewdr /usr/local/bin/clewdr
 
 # 复制静态资源（如有前端静态文件，可根据实际情况调整）
 COPY frontend/public ./frontend/public
+
+# 赋予 /app 目录写权限，解决 Huggingface Spaces 权限问题
+RUN chmod 777 /app
 
 # 默认暴露端口（可根据 config.toml 配置调整）
 EXPOSE 8484
