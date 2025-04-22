@@ -11,6 +11,9 @@ WORKDIR ${APP_DIR}
 RUN apt-get update && apt-get install -y \
     pkg-config \
     cmake \
+    clang \
+    libclang-dev \
+    llvm-dev \
     libssl-dev \
     libsqlite3-dev \
     zlib1g-dev \
