@@ -1,5 +1,5 @@
 # 基础镜像，适用于本地和 CI 构建
-FROM rust:1.76 as builder
+FROM rustlang/rust:nightly as builder
 
 # 设置构建参数
 ARG APP_DIR=/app
