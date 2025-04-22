@@ -10,6 +10,7 @@ WORKDIR ${APP_DIR}
 # 安装常见构建依赖（如 openssl、sqlite、zlib）
 RUN apt-get update && apt-get install -y \
     pkg-config \
+    cmake \
     libssl-dev \
     libsqlite3-dev \
     zlib1g-dev \
