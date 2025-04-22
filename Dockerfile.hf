@@ -1,0 +1,16 @@
+# Huggingface Spaces 专用 Dockerfile
+# 请将 clewdr:latest 替换为你实际推送到仓库的镜像名
+FROM clewdr:latest
+
+# 复制入口脚本
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+# Huggingface Spaces 推荐的数据目录
+VOLUME ["/data"]
+
+# 暴露主程序端口
+EXPOSE 8484
+
+# 使用自定义 entrypoint，自动处理 config.toml
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
