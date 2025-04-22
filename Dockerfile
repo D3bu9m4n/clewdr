@@ -7,6 +7,14 @@ ARG APP_DIR=/app
 # 创建工作目录
 WORKDIR ${APP_DIR}
 
+# 安装常见构建依赖（如 openssl、sqlite、zlib）
+RUN apt-get update && apt-get install -y \
+    pkg-config \
+    libssl-dev \
+    libsqlite3-dev \
+    zlib1g-dev \
+    && rm -rf /var/lib/apt/lists/*
+
 # 复制项目文件
 COPY . .
 
